@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Circle, CircleCheckBig, Square, SquareCheckBig } from "lucide-react";
-import { cn } from "@/lib/classnames";
+import { cn } from "@/utils/classnames";
 import { toggleVariants } from "@/components/ui/toggle";
 
 const ToggleGroupContext = React.createContext<

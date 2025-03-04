@@ -1,17 +1,26 @@
-import { ErrorFallback } from "@/components/ErrorFallback";
-import { Button } from "@/components/ui/button.tsx";
-import { Form } from "@/components/ui/form.tsx";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
-import { roundToNearest30Minutes } from "@/lib/times.ts";
-import { addDays, addHours, format } from "date-fns";
 import { Suspense, useState } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 import { useForm } from "react-hook-form";
-import { FormValues } from "@/components/search/form.tsx";
-import { AdditionalFilters } from "@/components/search/AdditionalFilters.tsx";
-import { VehicleList } from "@/components/search/VehicleList.tsx";
-import { TimeRangeFilters } from "@/components/search/TimeRangeFilters.tsx";
+import { addDays, addHours, format } from "date-fns";
+import { ErrorBoundary } from "react-error-boundary";
+
+import { type FormValues } from "@/types/filter-form";
+import { roundToNearest30Minutes } from "@/utils/times";
+
+import {
+  FilterActiveTags,
+  TimeRangeFilters,
+  VehicleList,
+  AdditionalFilters,
+  ErrorFallback,
+} from "@/components/layout";
+import {
+  Button,
+  Form,
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  Skeleton,
+} from "@/components/ui";
 
 export function SearchPage() {
   const [initialStartDateAndTime] = useState(() =>
@@ -81,23 +90,46 @@ export function SearchPage() {
             <div className="hidden md:block">{filters}</div>
           </div>
 
-          <div className="col-span-12 md:col-span-9 px-4 py-8">
-            <ErrorBoundary
-              fallback={<ErrorFallback message="Failed to load vehicles" />}
-            >
-              <Suspense
+          <div className="col-span-12 md:col-span-9 px-4 space-y-8">
+            <div>
+              <ErrorBoundary
                 fallback={
-                  <div className="flex flex-col gap-4">
-                    <Skeleton className="w-full h-[178px] rounded" />
-                    <Skeleton className="w-full h-[178px] rounded" />
-                    <Skeleton className="w-full h-[178px] rounded" />
-                    <Skeleton className="w-full h-[178px] rounded" />
-                  </div>
+                  <ErrorFallback message="Failed to load active filters" />
                 }
               >
-                <VehicleList />
-              </Suspense>
-            </ErrorBoundary>
+                <Suspense
+                  fallback={
+                    <div className="flex gap-4">
+                      <Skeleton className="w-[120px] h-[44px] rounded" />
+                      <Skeleton className="w-[120px] h-[44px] rounded" />
+                      <Skeleton className="w-[120px] h-[44px] rounded" />
+                      <Skeleton className="w-[120px] h-[44px] rounded" />
+                    </div>
+                  }
+                >
+                  <FilterActiveTags />
+                </Suspense>
+              </ErrorBoundary>
+            </div>
+
+            <div>
+              <ErrorBoundary
+                fallback={<ErrorFallback message="Failed to load vehicles" />}
+              >
+                <Suspense
+                  fallback={
+                    <div className="flex flex-col gap-4">
+                      <Skeleton className="w-full h-[178px] rounded" />
+                      <Skeleton className="w-full h-[178px] rounded" />
+                      <Skeleton className="w-full h-[178px] rounded" />
+                      <Skeleton className="w-full h-[178px] rounded" />
+                    </div>
+                  }
+                >
+                  <VehicleList />
+                </Suspense>
+              </ErrorBoundary>
+            </div>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import { cn } from "@/lib/classnames.ts";
+import { cn } from "@/utils/classnames";
 import { addMinutes, format, isBefore, isSameDay, startOfDay } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar.tsx";
@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select.tsx";
-import { FormValues } from "@/components/search/form.tsx";
+import { FormValues } from "@/types/filter-form";
 
 function getTimeOptions(startDate: Date) {
   const start = startOfDay(startDate);

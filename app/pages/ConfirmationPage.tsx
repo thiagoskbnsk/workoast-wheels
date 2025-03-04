@@ -1,16 +1,18 @@
-import { ErrorFallback } from "@/components/ErrorFallback";
-import { MiniPageLayout } from "@/components/MiniPageLayout";
-import { Button } from "@/components/ui/button.tsx";
-import { Separator } from "@/components/ui/separator.tsx";
-import { Skeleton } from "@/components/ui/skeleton";
-import { VehicleDetails } from "@/components/VehicleDetails.tsx";
-import { formatCents } from "@/lib/formatters.tsx";
-import { trpc } from "@/trpc.ts";
+import { Suspense } from "react";
 import { format } from "date-fns";
 import { ArrowRightIcon } from "lucide-react";
-import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Link, useParams } from "react-router-dom";
+
+import { formatCents } from "@/utils/formatters";
+import { trpc } from "@/trpc";
+
+import {
+  ErrorFallback,
+  MiniPageLayout,
+  VehicleDetails,
+} from "@/components/layout";
+import { Button, Separator, Skeleton } from "@/components/ui";
 
 function Content() {
   const { reservationId } = useParams();

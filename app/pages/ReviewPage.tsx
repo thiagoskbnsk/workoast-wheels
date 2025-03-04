@@ -1,15 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { formatCents } from "@/lib/formatters";
-import { trpc } from "@/trpc";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { format, formatDuration, intervalToDuration } from "date-fns";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Separator } from "@/components/ui/separator.tsx";
-import { VehicleDetails } from "@/components/VehicleDetails.tsx";
-import { MiniPageLayout } from "../components/MiniPageLayout";
-import { Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ErrorBoundary } from "react-error-boundary";
-import { ErrorFallback } from "@/components/ErrorFallback";
+
+import { formatCents } from "@/utils/formatters";
+import { trpc } from "@/trpc";
+
+import {
+  VehicleDetails,
+  MiniPageLayout,
+  ErrorFallback,
+} from "@/components/layout";
+
+import { Separator, Button, Skeleton } from "@/components/ui";
 
 function Timeline({ startDate, endDate }: { startDate: Date; endDate: Date }) {
   return (

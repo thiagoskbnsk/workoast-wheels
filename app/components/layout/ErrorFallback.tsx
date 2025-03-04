@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 export function ErrorFallback({ message }: { message: React.ReactNode }) {
   return (

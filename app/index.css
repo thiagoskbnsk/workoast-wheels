@@ -57,8 +57,9 @@
 
     --chart-5: 27 87% 67%;
 
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
+
   .dark {
 
     --background: 0 0% 3.9%;
@@ -107,7 +108,7 @@
 
     --chart-4: 280 65% 60%;
 
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
   }
 }
 
@@ -117,5 +118,26 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.custom-input-container {
+  @apply relative;
+
+  button {
+    @apply opacity-0 absolute pointer-events-none;
+  }
+
+  span {
+    @apply flex border rounded-sm px-3 py-1 cursor-pointer;
+  }
+
+  button[aria-checked='true']+span {
+    @apply bg-primary text-white;
+  }
+
+  button:focus-visible+span,
+  button.focus-visible+span {
+    @apply ring-2 ring-primary;
   }
 }

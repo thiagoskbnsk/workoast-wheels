@@ -1,4 +1,4 @@
-import type { Vehicle } from "@/trpc.ts";
+import type { Vehicle } from "@/trpc";
 
 export interface VehicleDetailsProps {
   vehicle: Vehicle;
